@@ -10,6 +10,7 @@ const char* ssid = "Robot";
 const char* password = "123456789";
 
 int driveSpeed = 0;
+int steerDelay = 500;
 
 ESP32WebServer server(80);  //Default port number
 
@@ -44,14 +45,14 @@ void handleMotors()
   {
     Serial.println("Right");
     ST.motor(2, 127);
-    delay(250);
+    delay(steerDelay);
     ST.motor(2, 0);
   }
   else if (t_state.startsWith("L")) //Turn Left (LEFT Arrow)
   {
     Serial.println("Left");
     ST.motor(2, -127);
-    delay(250);
+    delay(steerDelay);
     ST.motor(2, 0);
   }
   else if (t_state.startsWith("E")) //E-Stop (Space Bar)
