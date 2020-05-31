@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Huge Robot</title>
+        <script type="text/javascript">
+            var sendCommand = 1;
+
+            //Key Pressed
+            document.addEventListener("keydown", function (evt) {
+                if (evt.keyCode == "38" && sendCommand) {   // up arrow
+                    sendData("U") 
+                    sendCommand = 0;
+                }
+                else if (evt.keyCode == "40" && sendCommand) {  // down arrow
+                    sendData("D") 
+                    sendCommand = 0;
+                }
+                else if (evt.keyCode == "37" && sendCommand) {  // left arrow
+                    sendData("L") 
+                    sendCommand = 0;
+                }
+                else if (evt.keyCode == "39" && sendCommand) {  // right arrow
+                    sendData("R")
+                    sendCommand = 0;
+                }
+                else if (evt.keyCode == "32" && sendCommand) {  // space bar
+                    sendData("E")
+                    sendCommand = 0;
+                }
+            });
+
+            //Key Released
+            document.addEventListener("keyup", function (evt) {
+                sendCommand = 1;
+            });
+
+            function sendData(motorData) {  //Send data for ESP32 to resond to
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                    }
+                };
+                xhttp.open("GET", "setMotors?motorState="+motorData, true);
+                xhttp.send();
+            }
+        </script>
+    </head>
+    <body>
+        <h2>ESP32 + Sabertooth Motor Control Test</h2>
+        <p>Use the arrow keys send commands to the motors!</p>
+   </body>
+</html>
