@@ -10,6 +10,7 @@ const char* ssid = "Robot";
 const char* password = "123456789";
 
 int driveSpeed = 0;
+int speedIncrement = 5;
 int steerDelay = 500;
 
 ESP32WebServer server(80);  //Default port number
@@ -34,12 +35,12 @@ void handleMotors()
   if (t_state.startsWith("U")) //Drive Forward (UP Arrow)
   {
     Serial.println("Forwards");
-    driveSpeed += 1;
+    driveSpeed += speedIncrement;
   }
   else if (t_state.startsWith("D")) //Reverse (DOWN Arrow)
   {
     Serial.println("Backwards");
-    driveSpeed -= 1;
+    driveSpeed -= speedIncrement;
   }
   else if (t_state.startsWith("R")) //Turn Right (Right Arrow)
   {
